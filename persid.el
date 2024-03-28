@@ -470,13 +470,9 @@ url       = {%s},
          (concat "@Article"
                  (buffer-substring beg (- end (length "</textarea>")))))))))
 
-;;;###autoload
 (defun persid-bibtex-from (identifier)
   "Retrieve bibtex information from given IDENTIFIER"
 
-  (interactive
-   (list (read-from-minibuffer "Identifier: " nil nil nil 'persid-history)))
-  
   (let ((formats (persid-identify identifier))
         (bitex))
     (catch 'found
@@ -488,11 +484,12 @@ url       = {%s},
     bibtex))
 
 ;;;###autoload
-(defun bibtex-from (identifier)
-  "Alias to `persid-bibtex-from `function"
-  
-  (persid-bibtex-from identifier))
+(defun persid-insert-bibtex (identifier)
+  "Insert bibtex information from given IDENTIFIER."
 
+  (interactive
+   (list (read-from-minibuffer "Identifier: " nil nil nil 'persid-history)))
+  (insert (persid-bibtex-from identifier)))
 
 (defun persid--openalex/normalize-name (name)
   "Normalize NAME given as 'firstname(s) surname' to
