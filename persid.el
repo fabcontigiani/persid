@@ -419,7 +419,8 @@ See more: https://openlibrary.org/dev/docs/api/books"
             (cons 'publisher (string-join (mapcar #'cdar .publishers) " and "))
             (cons 'isbn (car (append (or .identifiers.isbn_13
                                          .identifiers.isbn_10) nil)))
-            (cons 'url .url)))))
+            (cons 'url (string-trim-right .url "/[^\/]*")))))) ;; trim title from url
+
 
 (defun persid-bibtex-from-isbn (identifier)
   "Retrieve bibtex information from an ISBN IDENTIFIER"
