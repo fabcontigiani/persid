@@ -444,7 +444,8 @@ url       = {%s},
           (unless (eq persid-isbn-generate-citekey 'user)
             (setq-local bibtex-autokey-edit-before-use
                         (eq persid-isbn-generate-citekey 'prompt)))
-          (bibtex-clean-entry t))
+          (ignore-errors
+            (bibtex-clean-entry t)))
         (buffer-string)))))
 
 (defun persid--decode-entities (html)
